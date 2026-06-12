@@ -1,7 +1,9 @@
 import { AnimatePresence, motion, MotionGlobalConfig } from 'framer-motion'
 import { useState } from 'react'
 
-// ?nomotion=1 jumps all animations to their final state (for QA screenshots)
+// ?nomotion=1 jumps all animations to their final state (for QA screenshots).
+// Applies to the current load only — the param is consumed so a refresh
+// brings animations back.
 if (new URLSearchParams(window.location.search).has('nomotion')) {
   MotionGlobalConfig.skipAnimations = true
 }
@@ -20,9 +22,11 @@ const STEPS: Step[] = ['splash', 'intro', 'mail', 'welcome', 'skin', 'interests'
 const initialStep = (): Step => {
   const params = new URLSearchParams(window.location.search)
   const q = params.get('step')
-  if (q !== null) {
-    // consume the param so a plain refresh always restarts from the splash
+  if (q !== null || params.has('nomotion')) {
+    // consume the QA params so a plain refresh restarts from the splash
+    // with animations on
     params.delete('step')
+    params.delete('nomotion')
     const rest = params.toString()
     window.history.replaceState(null, '', rest ? `?${rest}` : window.location.pathname)
   }
