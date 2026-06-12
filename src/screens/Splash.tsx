@@ -17,15 +17,19 @@ export default function Splash({ onDone }: { onDone: () => void }) {
       }}
     >
       <StatusBar />
-      <motion.img
-        src="/assets/logo.png"
-        alt="noon nano"
-        initial={{ scale: 0.7, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        transition={{ type: 'spring', stiffness: 240, damping: 18, delay: 0.15 }}
-        className="absolute left-1/2 top-[41%] w-[235px] -translate-x-1/2 -translate-y-1/2"
-        draggable={false}
-      />
+      {/* centering lives on this static wrapper — framer-motion owns the inner
+          element's transform, so translate classes there would be overwritten */}
+      <div className="absolute inset-x-0 top-[41%] flex -translate-y-1/2 justify-center">
+        <motion.img
+          src="/assets/logo.png"
+          alt="noon nano"
+          initial={{ scale: 0.7, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ type: 'spring', stiffness: 240, damping: 18, delay: 0.15 }}
+          className="w-[235px]"
+          draggable={false}
+        />
+      </div>
     </div>
   )
 }
