@@ -3,6 +3,7 @@ import { useState } from 'react'
 import StatusBar from '../components/StatusBar'
 import PrimaryButton from '../components/PrimaryButton'
 import Stepper from '../components/Stepper'
+import { asset } from '../lib/asset'
 
 const ITEMS = [
   { id: 'art', label: 'Art' },
@@ -52,7 +53,7 @@ export default function Interests({ onDone }: { onDone: (picked: string[]) => vo
                 {item.label}
               </span>
               <img
-                src={`/assets/i_${item.id}.png`}
+                src={asset(`i_${item.id}.png`)}
                 alt=""
                 className="absolute bottom-0 right-0 w-[68px]"
                 draggable={false}

@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import { useEffect } from 'react'
 import StatusBar from '../components/StatusBar'
+import { asset } from '../lib/asset'
 
 export default function Splash({ onDone }: { onDone: () => void }) {
   useEffect(() => {
@@ -21,7 +22,7 @@ export default function Splash({ onDone }: { onDone: () => void }) {
           element's transform, so translate classes there would be overwritten */}
       <div className="absolute inset-x-0 top-[41%] flex -translate-y-1/2 justify-center">
         <motion.img
-          src="/assets/logo.png"
+          src={asset('logo.png')}
           alt="noon nano"
           initial={{ scale: 0.7, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}

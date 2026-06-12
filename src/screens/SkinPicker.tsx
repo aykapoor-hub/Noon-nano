@@ -4,6 +4,7 @@ import StatusBar from '../components/StatusBar'
 import PrimaryButton from '../components/PrimaryButton'
 import Stepper from '../components/Stepper'
 import WalletCard from '../components/WalletCard'
+import { asset } from '../lib/asset'
 
 export type Skin = 'purple' | 'silver' | 'blue' | 'green' | 'dark'
 
@@ -80,7 +81,7 @@ export default function SkinPicker({
                 style={{ width: i === idx ? THUMB_W + 14 : THUMB_W }}
               >
                 <img
-                  src={`/assets/thumb_${s}.png`}
+                  src={asset(`thumb_${s}.png`)}
                   alt={s}
                   className="w-full rounded-[7px]"
                   draggable={false}

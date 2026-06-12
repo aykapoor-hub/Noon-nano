@@ -2,6 +2,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
 import StatusBar from '../components/StatusBar'
 import PrimaryButton from '../components/PrimaryButton'
+import { asset } from '../lib/asset'
 
 const Backspace = () => (
   <svg width="26" height="20" viewBox="0 0 26 20" fill="none">
@@ -68,7 +69,7 @@ export default function CheckMail({ onNext }: { onNext: () => void }) {
         className="relative w-full overflow-hidden"
       >
         <motion.img
-          src="/assets/envelope_band.png"
+          src={asset('envelope_band.png')}
           alt=""
           initial={{ scale: 0.92, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}

@@ -3,6 +3,7 @@ import StatusBar from '../components/StatusBar'
 import WalletCard from '../components/WalletCard'
 import Dirham from '../components/Dirham'
 import type { Skin } from './SkinPicker'
+import { asset } from '../lib/asset'
 
 const Sparkle = ({ color }: { color: string }) => (
   <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
@@ -46,16 +47,16 @@ export default function Home({ skin }: { skin: Skin }) {
       >
         {/* brand switcher — sliced from the Figma frame to keep the real brand marks */}
         <motion.div variants={block} className="flex items-center gap-2 overflow-hidden pl-4">
-          <img src="/assets/chip_nano.png" className="h-[64px] shrink-0" alt="noon nano" draggable={false} />
-          <img src="/assets/chip_noon.png" className="h-[58px] shrink-0" alt="noon" draggable={false} />
-          <img src="/assets/chip_mall.png" className="h-[58px] shrink-0" alt="supermall" draggable={false} />
-          <img src="/assets/chip_food.png" className="h-[58px] shrink-0" alt="noon food" draggable={false} />
-          <img src="/assets/chip_15.png" className="h-[58px] shrink-0" alt="15 minutes" draggable={false} />
+          <img src={asset('chip_nano.png')} className="h-[64px] shrink-0" alt="noon nano" draggable={false} />
+          <img src={asset('chip_noon.png')} className="h-[58px] shrink-0" alt="noon" draggable={false} />
+          <img src={asset('chip_mall.png')} className="h-[58px] shrink-0" alt="supermall" draggable={false} />
+          <img src={asset('chip_food.png')} className="h-[58px] shrink-0" alt="noon food" draggable={false} />
+          <img src={asset('chip_15.png')} className="h-[58px] shrink-0" alt="15 minutes" draggable={false} />
         </motion.div>
 
         {/* greeting row */}
         <motion.div variants={block} className="mt-4 flex items-center px-4">
-          <img src="/assets/avatar.png" className="h-11 w-11 rounded-full" alt="Kiaan" draggable={false} />
+          <img src={asset('avatar.png')} className="h-11 w-11 rounded-full" alt="Kiaan" draggable={false} />
           <div className="ml-3 min-w-0 flex-1">
             <p className="text-[16px] font-bold leading-tight text-ink">Hey Kiaan</p>
             <p className="truncate text-[12.5px] font-medium text-[#7d8aa0]">
@@ -104,7 +105,7 @@ export default function Home({ skin }: { skin: Skin }) {
               Let’s go
             </button>
           </div>
-          <img src="/assets/banner_wallet.png" className="w-[92px]" alt="" draggable={false} />
+          <img src={asset('banner_wallet.png')} className="w-[92px]" alt="" draggable={false} />
         </motion.div>
 
         {/* earning streak */}
@@ -118,7 +119,7 @@ export default function Home({ skin }: { skin: Skin }) {
             </span>
           </div>
           <p className="mt-2 flex items-center gap-1.5 text-[17px] font-extrabold text-[#f15a24]">
-            <img src="/assets/flame.png" className="h-5" alt="" draggable={false} /> 4 Days
+            <img src={asset('flame.png')} className="h-5" alt="" draggable={false} /> 4 Days
           </p>
           <div className="mt-3 grid grid-cols-7 gap-1 border-t border-[#f1f3f6] pt-3">
             {WEEK.map((w) => (
@@ -126,7 +127,7 @@ export default function Home({ skin }: { skin: Skin }) {
                 <span className="text-[12px] font-semibold text-[#7d8aa0]">{w.d}</span>
                 {w.state === 'flame' ? (
                   <span className="flex h-10 w-10 items-center justify-center rounded-full border-[1.5px] border-[#f15a24] bg-[#fff3ec]">
-                    <img src="/assets/flame.png" className="h-5" alt="" draggable={false} />
+                    <img src={asset('flame.png')} className="h-5" alt="" draggable={false} />
                   </span>
                 ) : w.state === 'reward' ? (
                   <span className="flex h-10 w-10 items-center justify-center rounded-full border-[1.5px] border-[#bfd9f6] bg-[#eef6ff] font-display text-[12px] font-extrabold text-[#2563eb]">

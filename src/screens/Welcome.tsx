@@ -4,6 +4,7 @@ import StatusBar from '../components/StatusBar'
 import PrimaryButton from '../components/PrimaryButton'
 import WalletCard from '../components/WalletCard'
 import Dirham from '../components/Dirham'
+import { asset } from '../lib/asset'
 
 // circle collage positions lifted from the Figma frame (375x812 space)
 const CIRCLES = [
@@ -67,7 +68,7 @@ export default function Welcome({ onNext }: { onNext: () => void }) {
             {CIRCLES.map((c, i) => (
               <motion.img
                 key={c.src}
-                src={`/assets/${c.src}.png`}
+                src={asset(`${c.src}.png`)}
                 alt=""
                 initial={{ scale: 0, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}

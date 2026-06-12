@@ -1,5 +1,6 @@
 import Dirham from './Dirham'
 import type { Skin } from '../screens/SkinPicker'
+import { asset } from '../lib/asset'
 
 const SKIN_STYLE: Record<
   Skin,
@@ -48,7 +49,7 @@ export default function WalletCard({
         </span>
       </div>
       <img
-        src={`/assets/${s.body}.png`}
+        src={asset(`${s.body}.png`)}
         alt=""
         className="block max-w-none"
         style={{
