@@ -44,30 +44,13 @@ export default function Home({ skin }: { skin: Skin }) {
         variants={{ show: { transition: { staggerChildren: 0.08, delayChildren: 0.15 } } }}
         className="pb-12 pt-[54px]"
       >
-        {/* brand switcher — typographic marks rebuilt in HTML so they stay crisp */}
+        {/* brand switcher — sliced from the Figma frame to keep the real brand marks */}
         <motion.div variants={block} className="flex items-center gap-2 overflow-hidden pl-4">
-          <span className="flex h-[58px] w-[72px] shrink-0 items-center justify-center rounded-2xl border-[2.5px] border-[#638ef8] bg-[#92bffc]">
-            <img src="/assets/logo.png" className="h-9" alt="noon nano" draggable={false} />
-          </span>
-          <span className="flex h-[58px] w-[70px] shrink-0 items-center justify-center rounded-2xl bg-white font-display text-[18px] font-extrabold tracking-tight text-black shadow-chip">
-            noon
-          </span>
-          <span className="flex h-[58px] w-[70px] shrink-0 flex-col items-center justify-center rounded-2xl bg-white font-display text-[15px] font-extrabold leading-[0.95] tracking-tight text-[#1f20b7] shadow-chip">
-            <span>super</span>
-            <span>mall</span>
-          </span>
-          <span className="flex h-[58px] w-[70px] shrink-0 flex-col items-center justify-center rounded-2xl bg-white font-display text-[15px] font-extrabold leading-[0.95] tracking-tight shadow-chip">
-            <span className="text-black">noon</span>
-            <span className="text-[#e5004e]">FOOD</span>
-          </span>
-          <span className="flex h-[58px] w-[64px] shrink-0 flex-col items-center justify-center rounded-2xl bg-[#e0232c] shadow-chip">
-            <span className="font-display text-[24px] font-extrabold italic leading-none text-[#ffd900]">
-              15
-            </span>
-            <span className="font-display text-[7px] font-extrabold tracking-[0.08em] text-[#ffd900]">
-              MINUTES
-            </span>
-          </span>
+          <img src="/assets/chip_nano.png" className="h-[64px] shrink-0" alt="noon nano" draggable={false} />
+          <img src="/assets/chip_noon.png" className="h-[58px] shrink-0" alt="noon" draggable={false} />
+          <img src="/assets/chip_mall.png" className="h-[58px] shrink-0" alt="supermall" draggable={false} />
+          <img src="/assets/chip_food.png" className="h-[58px] shrink-0" alt="noon food" draggable={false} />
+          <img src="/assets/chip_15.png" className="h-[58px] shrink-0" alt="15 minutes" draggable={false} />
         </motion.div>
 
         {/* greeting row */}
