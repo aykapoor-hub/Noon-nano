@@ -1,4 +1,4 @@
-import { AnimatePresence, motion, MotionGlobalConfig } from 'framer-motion'
+import { AnimatePresence, LayoutGroup, motion, MotionGlobalConfig } from 'framer-motion'
 import { useState } from 'react'
 
 // ?nomotion=1 jumps all animations to their final state (for QA screenshots).
@@ -59,18 +59,22 @@ export default function App() {
     <div className="flex h-full items-center justify-center sm:p-6">
       {/* phone frame on desktop, full-bleed on mobile */}
       <div className="relative h-full w-full overflow-hidden bg-white sm:h-[812px] sm:w-[375px] sm:rounded-[44px] sm:shadow-[0_40px_90px_-20px_rgba(0,0,0,0.65)] sm:ring-[10px] sm:ring-[#0d111c]">
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={step}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="h-full w-full"
-          >
-            {screen}
-          </motion.div>
-        </AnimatePresence>
+        {/* screens overlap during the crossfade so shared layoutId elements
+            (the nano logo) can travel between them */}
+        <LayoutGroup>
+          <AnimatePresence initial={false}>
+            <motion.div
+              key={step}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className="absolute inset-0"
+            >
+              {screen}
+            </motion.div>
+          </AnimatePresence>
+        </LayoutGroup>
       </div>
     </div>
   )

@@ -21,7 +21,9 @@ export default function Splash({ onDone }: { onDone: () => void }) {
       {/* centering lives on this static wrapper — framer-motion owns the inner
           element's transform, so translate classes there would be overwritten */}
       <div className="absolute inset-x-0 top-[41%] flex -translate-y-1/2 justify-center">
+        {/* layoutId pairs this with the intro logo for a shared-element move */}
         <motion.img
+          layoutId="nano-logo"
           src={asset('logo.png')}
           alt="noon nano"
           initial={{ scale: 0.7, opacity: 0 }}

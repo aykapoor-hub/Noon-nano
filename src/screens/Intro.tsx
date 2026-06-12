@@ -22,12 +22,12 @@ export default function Intro({ onNext }: { onNext: () => void }) {
       />
       <StatusBar />
 
+      {/* shared element with the splash logo — rises up and settles here */}
       <motion.img
+        layoutId="nano-logo"
         src={asset('logo.png')}
         alt="noon nano"
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.45, ease: 'easeOut' }}
+        transition={{ type: 'spring', stiffness: 160, damping: 20 }}
         className="relative mx-auto mt-[112px] w-[182px]"
         draggable={false}
       />
