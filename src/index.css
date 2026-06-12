@@ -1,0 +1,54 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  @apply bg-navy-deep font-body text-ink antialiased;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+}
+
+/* headline with the black -> gold tail gradient from the design */
+.headline-gradient {
+  background-image: linear-gradient(90deg, #16181d 52%, #4d431f 82%, #8a7a2e 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* faint grid-paper background behind the wallet reveal */
+.grid-paper {
+  background-image:
+    linear-gradient(to right, rgba(39, 48, 69, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(39, 48, 69, 0.05) 1px, transparent 1px);
+  background-size: 42px 42px;
+}
+
+/* soft spotlight beams on splash / intro backgrounds */
+.beams::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(190deg, rgba(255, 255, 255, 0.85) 0%, rgba(255, 255, 255, 0) 42%),
+    linear-gradient(170deg, rgba(255, 255, 255, 0.85) 0%, rgba(255, 255, 255, 0) 42%);
+  pointer-events: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
