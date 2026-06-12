@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import StatusBar from '../components/StatusBar'
 import PrimaryButton from '../components/PrimaryButton'
 import WalletCard from '../components/WalletCard'
+import Dirham from '../components/Dirham'
 
 // circle collage positions lifted from the Figma frame (375x812 space)
 const CIRCLES = [
@@ -152,7 +153,7 @@ export default function Welcome({ onNext }: { onNext: () => void }) {
               }}
               className="mt-6"
             >
-              <WalletCard skin="blue" balance="Đ0.00" />
+              <WalletCard skin="blue" balance="0.00" />
             </motion.div>
 
             <motion.p
@@ -166,7 +167,7 @@ export default function Welcome({ onNext }: { onNext: () => void }) {
               variants={{ hidden: { opacity: 0, scale: 0.6 }, show: { opacity: 1, scale: 1 } }}
               className="mt-4 flex h-11 w-11 items-center justify-center rounded-full bg-[#eceef1] font-display text-[20px] font-extrabold text-[#c2c7d0] shadow-inner"
             >
-              Đ
+              <Dirham />
             </motion.div>
 
             <motion.div

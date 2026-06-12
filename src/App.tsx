@@ -18,7 +18,14 @@ type Step = 'splash' | 'intro' | 'mail' | 'welcome' | 'skin' | 'interests' | 'ho
 const STEPS: Step[] = ['splash', 'intro', 'mail', 'welcome', 'skin', 'interests', 'home']
 
 const initialStep = (): Step => {
-  const q = new URLSearchParams(window.location.search).get('step')
+  const params = new URLSearchParams(window.location.search)
+  const q = params.get('step')
+  if (q !== null) {
+    // consume the param so a plain refresh always restarts from the splash
+    params.delete('step')
+    const rest = params.toString()
+    window.history.replaceState(null, '', rest ? `?${rest}` : window.location.pathname)
+  }
   return STEPS.includes(q as Step) ? (q as Step) : 'splash'
 }
 
@@ -37,6 +44,7 @@ export default function App() {
           setSkin(s)
           setStep('interests')
         }}
+        onSkip={() => setStep('interests')}
       />
     ),
     interests: <Interests onDone={() => setStep('home')} />,

@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import StatusBar from '../components/StatusBar'
 import WalletCard from '../components/WalletCard'
+import Dirham from '../components/Dirham'
 import type { Skin } from './SkinPicker'
 
 const Sparkle = ({ color }: { color: string }) => (
@@ -43,13 +44,30 @@ export default function Home({ skin }: { skin: Skin }) {
         variants={{ show: { transition: { staggerChildren: 0.08, delayChildren: 0.15 } } }}
         className="pb-12 pt-[54px]"
       >
-        {/* brand switcher */}
+        {/* brand switcher — typographic marks rebuilt in HTML so they stay crisp */}
         <motion.div variants={block} className="flex items-center gap-2 overflow-hidden pl-4">
-          <img src="/assets/chip_nano.png" className="h-[64px] shrink-0" alt="noon nano" draggable={false} />
-          <img src="/assets/chip_noon.png" className="h-[58px] shrink-0" alt="noon" draggable={false} />
-          <img src="/assets/chip_mall.png" className="h-[58px] shrink-0" alt="supermall" draggable={false} />
-          <img src="/assets/chip_food.png" className="h-[58px] shrink-0" alt="noon food" draggable={false} />
-          <img src="/assets/chip_15.png" className="h-[58px] shrink-0" alt="15 minutes" draggable={false} />
+          <span className="flex h-[58px] w-[72px] shrink-0 items-center justify-center rounded-2xl border-[2.5px] border-[#638ef8] bg-[#92bffc]">
+            <img src="/assets/logo.png" className="h-9" alt="noon nano" draggable={false} />
+          </span>
+          <span className="flex h-[58px] w-[70px] shrink-0 items-center justify-center rounded-2xl bg-white font-display text-[18px] font-extrabold tracking-tight text-black shadow-chip">
+            noon
+          </span>
+          <span className="flex h-[58px] w-[70px] shrink-0 flex-col items-center justify-center rounded-2xl bg-white font-display text-[15px] font-extrabold leading-[0.95] tracking-tight text-[#1f20b7] shadow-chip">
+            <span>super</span>
+            <span>mall</span>
+          </span>
+          <span className="flex h-[58px] w-[70px] shrink-0 flex-col items-center justify-center rounded-2xl bg-white font-display text-[15px] font-extrabold leading-[0.95] tracking-tight shadow-chip">
+            <span className="text-black">noon</span>
+            <span className="text-[#e5004e]">FOOD</span>
+          </span>
+          <span className="flex h-[58px] w-[64px] shrink-0 flex-col items-center justify-center rounded-2xl bg-[#e0232c] shadow-chip">
+            <span className="font-display text-[24px] font-extrabold italic leading-none text-[#ffd900]">
+              15
+            </span>
+            <span className="font-display text-[7px] font-extrabold tracking-[0.08em] text-[#ffd900]">
+              MINUTES
+            </span>
+          </span>
         </motion.div>
 
         {/* greeting row */}
@@ -75,7 +93,7 @@ export default function Home({ skin }: { skin: Skin }) {
 
         {/* wallet */}
         <motion.div variants={block} className="mt-4 flex justify-center">
-          <WalletCard skin={skin} balance="Đ5.00" />
+          <WalletCard skin={skin} balance="5.00" />
         </motion.div>
 
         <motion.div variants={block} className="mt-4 flex items-center justify-center gap-2.5">
@@ -94,7 +112,10 @@ export default function Home({ skin }: { skin: Skin }) {
         >
           <div>
             <p className="w-[180px] text-[16px] font-bold leading-snug text-ink">
-              <span className="text-[#16a34a]">Earn Đ5</span> by completing your first task!
+              <span className="text-[#16a34a]">
+                Earn <Dirham className="mx-[1px]" />5
+              </span>{' '}
+              by completing your first task!
             </p>
             <button className="mt-3 rounded-full bg-navy px-4 py-2 text-[13px] font-semibold text-white">
               Let’s go
@@ -126,7 +147,8 @@ export default function Home({ skin }: { skin: Skin }) {
                   </span>
                 ) : w.state === 'reward' ? (
                   <span className="flex h-10 w-10 items-center justify-center rounded-full border-[1.5px] border-[#bfd9f6] bg-[#eef6ff] font-display text-[12px] font-extrabold text-[#2563eb]">
-                    Đ13
+                    <Dirham className="mr-px" />
+                    13
                   </span>
                 ) : (
                   <span className="h-10 w-10 rounded-full bg-[#f1f3f6]" />

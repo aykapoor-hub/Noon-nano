@@ -14,8 +14,10 @@ const THUMB_GAP = 14
 
 export default function SkinPicker({
   onConfirm,
+  onSkip,
 }: {
   onConfirm: (skin: Skin) => void
+  onSkip: () => void
 }) {
   const [idx, setIdx] = useState(2) // blue is the default
   const skin: Skin = SKINS[idx]
@@ -54,7 +56,7 @@ export default function SkinPicker({
             exit={{ opacity: 0, scale: 0.92, y: -10 }}
             transition={{ type: 'spring', stiffness: 260, damping: 22 }}
           >
-            <WalletCard skin={skin} balance="Đ0.00" />
+            <WalletCard skin={skin} balance="0.00" />
           </motion.div>
         </AnimatePresence>
       </div>
@@ -88,9 +90,12 @@ export default function SkinPicker({
           </motion.div>
         </div>
 
-        <p className="mt-7 text-center text-[14px] font-medium text-[#aab3c5] underline underline-offset-2">
+        <button
+          onClick={onSkip}
+          className="mx-auto mt-7 block text-center text-[14px] font-medium text-[#aab3c5] underline underline-offset-2"
+        >
           Skip for now
-        </p>
+        </button>
 
         <div className="px-6 pb-9 pt-5">
           <PrimaryButton label="Confirm skin" onClick={() => onConfirm(skin)} />

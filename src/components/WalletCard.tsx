@@ -1,3 +1,4 @@
+import Dirham from './Dirham'
 import type { Skin } from '../screens/SkinPicker'
 
 const SKIN_STYLE: Record<
@@ -23,10 +24,11 @@ const SKIN_STYLE: Record<
 
 export default function WalletCard({
   skin = 'blue',
-  balance = 'Đ0.00',
+  balance = '0.00',
   className = '',
 }: {
   skin?: Skin
+  /** numeric part only — the dirham symbol is rendered alongside */
   balance?: string
   className?: string
 }) {
@@ -41,6 +43,7 @@ export default function WalletCard({
           Kiaan’s wallet
         </span>
         <span className="font-display text-[19px] font-extrabold tracking-tight text-ink">
+          <Dirham className="mr-[2px]" />
           {balance}
         </span>
       </div>

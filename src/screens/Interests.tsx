@@ -84,9 +84,12 @@ export default function Interests({ onDone }: { onDone: (picked: string[]) => vo
       </div>
 
       <div className="mt-auto">
-        <p className="text-center text-[14px] font-medium text-[#aab3c5] underline underline-offset-2">
+        <button
+          onClick={() => onDone([])}
+          className="mx-auto block text-center text-[14px] font-medium text-[#aab3c5] underline underline-offset-2"
+        >
           Skip for now
-        </p>
+        </button>
         <div className="px-6 pb-9 pt-5">
           <PrimaryButton
             label="Start exploring"
