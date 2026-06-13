@@ -15,6 +15,9 @@ export default {
       fontFamily: {
         display: ['Manrope', 'system-ui', 'sans-serif'],
         body: ['Inter', 'system-ui', 'sans-serif'],
+        // noon's brand face is "Noontree" (proprietary); Figtree is the design's
+        // own fallback and the closest free stand-in — used on the Account page.
+        noon: ['Figtree', 'system-ui', 'sans-serif'],
       },
       boxShadow: {
         key: '0 1px 0 rgba(0,0,0,0.30)',
