@@ -1,7 +1,5 @@
-import { motion } from 'framer-motion'
-import StatusBar from '../../components/StatusBar'
-import NavHeader from '../../components/NavHeader'
-import QRBlock from '../../components/QRBlock'
+import SetupShell, { SetupFooter } from '../../components/SetupShell'
+import { asset } from '../../lib/asset'
 
 export default function ScanAndGo({
   onBack,
@@ -13,47 +11,36 @@ export default function ScanAndGo({
   onNext: () => void
 }) {
   return (
-    <div className="relative flex h-full w-full flex-col bg-navy-deep text-white">
-      <StatusBar light />
-      <NavHeader title="Send them invite" onBack={onBack} light />
-
-      <div className="flex flex-1 flex-col items-center px-8 pt-6">
-        <h1 className="font-display text-[32px] font-extrabold tracking-tight">Scan and Go!</h1>
-        <p className="mt-2 text-center text-[14px] text-[#aab3c5]">
-          Kiaan can join noon nano by scanning<br />this QR code with their phone
-        </p>
-
-        <motion.div
-          initial={{ scale: 0.9, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ type: 'spring', stiffness: 200, damping: 18 }}
-          className="mt-10 rounded-[28px] bg-white p-6 shadow-card"
-        >
-          <QRBlock size={188} />
-        </motion.div>
-
-        <p className="mt-6 rounded-full bg-white/10 px-4 py-2 text-[13.5px] font-medium tracking-wide">
-          invite.noon.com/Kiaan
-        </p>
-
-        {/* prototype affordance: jump to the child's device as if they scanned */}
-        <button
-          onClick={onScan}
-          className="mt-auto flex w-full items-center justify-center gap-2 rounded-full bg-white/10 py-3.5 text-[14px] font-semibold text-white ring-1 ring-white/20"
-        >
-          <svg width="16" height="16" viewBox="0 0 17 17" fill="none">
-            <path d="M2 5V3a1 1 0 0 1 1-1h2M15 5V3a1 1 0 0 0-1-1h-2M2 12v2a1 1 0 0 0 1 1h2M15 12v2a1 1 0 0 1-1 1h-2M5 8.5h7" stroke="#fff" strokeWidth="1.5" strokeLinecap="round" />
-          </svg>
-          Simulate scan on Kiaan’s phone
+    <SetupShell title="Send them invite" onBack={onBack} footer={<SetupFooter label="Next" onClick={onNext} />}>
+      <div className="mb-3 overflow-hidden rounded-[16px] bg-white shadow-[0_2px_10px_rgba(39,48,69,0.04)]">
+        <div className="flex flex-col items-center px-5 pb-2 pt-5">
+          <h1 className="text-[28px] font-extrabold tracking-[-0.4px] text-[#1d2539]">Scan and Go!</h1>
+          <p className="mt-1.5 text-center text-[14px] leading-[20px] text-[#9aa3b8]">
+            Kiaan can access the noon nano app
+            <br />
+            using this QR code and PIN
+          </p>
+        </div>
+        {/* QR — tap to simulate the child scanning on their phone */}
+        <button onClick={onScan} className="flex w-full flex-col items-center pb-3">
+          <img src={asset('setup/qr.png')} alt="invite QR" className="h-[176px] w-[176px]" />
         </button>
-
-        <button
-          onClick={onNext}
-          className="mb-9 mt-3 w-full rounded-full bg-white py-4 text-[15px] font-semibold text-ink"
-        >
-          Next
-        </button>
+        <p className="pb-4 text-center text-[12px] text-[#aab1c0]">QR expires in 7 days</p>
       </div>
-    </div>
+
+      <div className="mb-3 flex items-center gap-3 px-2">
+        <span className="h-px flex-1 bg-[#e6e9ef]" />
+        <span className="text-[12px] font-medium text-[#aab1c0]">OR</span>
+        <span className="h-px flex-1 bg-[#e6e9ef]" />
+      </div>
+
+      <div className="flex items-center justify-between rounded-[14px] bg-white px-4 py-3.5 shadow-[0_2px_10px_rgba(39,48,69,0.04)]">
+        <p className="text-[15px] font-medium text-[#1d2539]">invite.noon.com/Faraz</p>
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+          <rect x="5.5" y="5.5" width="9" height="10" rx="2" stroke="#1d2539" strokeWidth="1.4" />
+          <path d="M12.5 5.5V3.5a2 2 0 0 0-2-2H4.5a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h1" stroke="#1d2539" strokeWidth="1.4" strokeLinecap="round" />
+        </svg>
+      </div>
+    </SetupShell>
   )
 }

@@ -1,70 +1,96 @@
 import { useState } from 'react'
-import StatusBar from '../../components/StatusBar'
-import NavHeader from '../../components/NavHeader'
-import PrimaryButton from '../../components/PrimaryButton'
+import SetupShell, { SetupFooter } from '../../components/SetupShell'
+import { asset } from '../../lib/asset'
 
-const Field = ({ label, value }: { label: string; value: string }) => (
-  <div className="flex-1 rounded-xl bg-[#f4f5f8] px-3.5 py-2.5">
+const Card = ({ children }: { children: React.ReactNode }) => (
+  <div className="mb-3 rounded-[16px] bg-white p-[18px] shadow-[0_2px_10px_rgba(39,48,69,0.04)]">{children}</div>
+)
+
+const Input = ({ label, value }: { label: string; value: string }) => (
+  <div className="flex-1 rounded-[12px] bg-[#f5f7fa] px-3.5 pb-2.5 pt-2">
     <p className="text-[11px] font-medium text-[#9aa3b8]">{label}</p>
-    <p className="mt-0.5 text-[15px] font-semibold text-ink">{value}</p>
+    <p className="mt-0.5 text-[15px] font-semibold text-[#1d2539]">{value}</p>
   </div>
 )
 
-const Spin = ({ value }: { value: string }) => (
-  <div className="flex-1 rounded-xl bg-[#f4f5f8] py-2.5 text-center">
-    <svg className="mx-auto" width="12" height="7" viewBox="0 0 12 7" fill="none">
-      <path d="m1 6 5-5 5 5" stroke="#9aa3b8" strokeWidth="1.5" strokeLinecap="round" />
-    </svg>
-    <p className="my-1 text-[18px] font-bold text-ink">{value}</p>
-    <svg className="mx-auto rotate-180" width="12" height="7" viewBox="0 0 12 7" fill="none">
-      <path d="m1 6 5-5 5 5" stroke="#9aa3b8" strokeWidth="1.5" strokeLinecap="round" />
-    </svg>
+const Chevron = ({ up }: { up?: boolean }) => (
+  <svg className={up ? '' : 'rotate-180'} width="12" height="7" viewBox="0 0 12 7" fill="none">
+    <path d="m1 6 5-5 5 5" stroke="#b3bacb" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+)
+const Stepper = ({ value }: { value: string }) => (
+  <div className="flex flex-1 flex-col items-center gap-1.5 rounded-[12px] bg-[#f5f7fa] py-3">
+    <Chevron up />
+    <p className="text-[20px] font-bold text-[#1d2539]">{value}</p>
+    <Chevron />
   </div>
 )
+
+function GenderOption({
+  symbol,
+  label,
+  selected,
+  onClick,
+}: {
+  symbol: string
+  label: string
+  selected: boolean
+  onClick: () => void
+}) {
+  return (
+    <button
+      onClick={onClick}
+      className={`flex flex-1 items-center gap-2 rounded-[12px] border px-3.5 py-3 transition-colors ${
+        selected ? 'border-transparent bg-[#f5f7fa]' : 'border-[#eef0f4] bg-[#f5f7fa]'
+      }`}
+    >
+      <span className="text-[16px] text-[#1d2539]">{symbol}</span>
+      <span className="text-[15px] font-semibold text-[#1d2539]">{label}</span>
+      <span className="ml-auto">
+        {selected ? (
+          <span className="flex h-[22px] w-[22px] items-center justify-center rounded-full bg-[#1d2539]">
+            <svg width="11" height="9" viewBox="0 0 11 9" fill="none">
+              <path d="m1 4.5 3 3L10 1" stroke="#fff" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </span>
+        ) : (
+          <span className="h-[22px] w-[22px] rounded-full border-[1.5px] border-[#d6dae2]" />
+        )}
+      </span>
+    </button>
+  )
+}
 
 export default function ChildDetails({ onBack, onNext }: { onBack: () => void; onNext: () => void }) {
   const [gender, setGender] = useState<'boy' | 'girl'>('boy')
   return (
-    <div className="relative flex h-full w-full flex-col bg-white">
-      <StatusBar />
-      <NavHeader title="Tell us about your child" onBack={onBack} />
-
-      <div className="flex-1 overflow-y-auto no-scrollbar px-5 pt-4">
-        <p className="text-[17px] font-bold text-ink">Child’s name</p>
+    <SetupShell title="Tell us about your child" onBack={onBack} footer={<SetupFooter label="Next" onClick={onNext} />}>
+      <Card>
+        <p className="text-[17px] font-bold text-[#1d2539]">Child’s name</p>
         <div className="mt-3 flex gap-3">
-          <Field label="First name*" value="Kiaan" />
-          <Field label="Last name*" value="Khalid" />
+          <Input label="First name*" value="Kiaan" />
+          <Input label="Last name*" value="Khalid" />
         </div>
+      </Card>
 
-        <p className="mt-7 text-[17px] font-bold text-ink">Birthday</p>
-        <p className="mt-1 text-[13.5px] text-[#9aa3b8]">
-          We’ll remind you when its time for a surprise gift
-        </p>
+      <Card>
+        <p className="text-[17px] font-bold text-[#1d2539]">Birthday</p>
+        <p className="mt-1 text-[13.5px] text-[#9aa3b8]">We’ll remind you when its time for a surprise gift</p>
+        <div className="mt-3.5 flex gap-3">
+          <Stepper value="26" />
+          <Stepper value="Nov" />
+          <Stepper value="2016" />
+        </div>
+        <img src={asset('setup/sun_arc.png')} alt="Kiaan is 10 years old" className="mx-auto mt-3 w-[170px]" />
+      </Card>
+
+      <Card>
+        <p className="text-[17px] font-bold text-[#1d2539]">Gender</p>
         <div className="mt-3 flex gap-3">
-          <Spin value="26" />
-          <Spin value="Nov" />
-          <Spin value="2016" />
+          <GenderOption symbol="♂" label="Boy" selected={gender === 'boy'} onClick={() => setGender('boy')} />
+          <GenderOption symbol="♀" label="Girl" selected={gender === 'girl'} onClick={() => setGender('girl')} />
         </div>
-
-        <p className="mt-7 text-[17px] font-bold text-ink">Gender</p>
-        <div className="mt-3 flex gap-3">
-          {(['boy', 'girl'] as const).map((g) => (
-            <button
-              key={g}
-              onClick={() => setGender(g)}
-              className={`flex-1 rounded-xl py-3 text-[15px] font-semibold capitalize transition-colors ${
-                gender === g ? 'bg-navy text-white' : 'bg-[#f4f5f8] text-[#6b7488]'
-              }`}
-            >
-              {g}
-            </button>
-          ))}
-        </div>
-      </div>
-
-      <div className="px-5 pb-9 pt-3">
-        <PrimaryButton label="Next" onClick={onNext} />
-      </div>
-    </div>
+      </Card>
+    </SetupShell>
   )
 }

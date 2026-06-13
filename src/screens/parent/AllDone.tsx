@@ -1,44 +1,43 @@
 import { motion } from 'framer-motion'
-import StatusBar from '../../components/StatusBar'
-import NavHeader from '../../components/NavHeader'
-import PrimaryButton from '../../components/PrimaryButton'
-import SuccessCheck from '../../components/SuccessCheck'
-import Dirham from '../../components/Dirham'
+import SetupShell, { SetupFooter } from '../../components/SetupShell'
+import { asset } from '../../lib/asset'
+
+const Divider = () => (
+  <div className="my-4 flex items-center gap-3">
+    <span className="h-px flex-1 bg-[#eceef2]" />
+    <svg width="8" height="8" viewBox="0 0 8 8" fill="none">
+      <path d="M4 0 5 3l3 1-3 1-1 3-1-3-3-1 3-1 1-3Z" fill="#d6dae2" />
+    </svg>
+    <span className="h-px flex-1 bg-[#eceef2]" />
+  </div>
+)
 
 export default function AllDone({ onBack, onDone }: { onBack: () => void; onDone: () => void }) {
   return (
-    <div className="relative flex h-full w-full flex-col bg-white">
-      <StatusBar />
-      <NavHeader title="All done!" onBack={onBack} />
-
-      <div className="flex flex-1 flex-col items-center justify-center px-8 pb-20">
-        <SuccessCheck tone="gold" size={104} />
-        <motion.h1
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.25 }}
-          className="mt-7 font-display text-[28px] font-extrabold tracking-tight text-ink"
-        >
+    <SetupShell
+      title="All done!"
+      onBack={onBack}
+      footer={<SetupFooter label="Done" onClick={onDone} note="The invite link expires in 7 days. We’ll remind you." />}
+    >
+      <div className="rounded-[16px] bg-white px-6 py-7 shadow-[0_2px_10px_rgba(39,48,69,0.04)]">
+        <motion.img
+          src={asset('setup/gold_check.png')}
+          alt=""
+          initial={{ scale: 0.6, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ type: 'spring', stiffness: 220, damping: 16 }}
+          className="mx-auto h-[104px] w-[104px]"
+        />
+        <h1 className="mt-6 text-center text-[28px] font-extrabold tracking-[-0.4px] text-[#1d2539]">
           Kiaan is all set!
-        </motion.h1>
-        <motion.p
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.35 }}
-          className="mt-3 text-center text-[14.5px] leading-relaxed text-[#9aa3b8]"
-        >
-          You’ll get a notification when Kiaan signs in
+        </h1>
+        <Divider />
+        <p className="text-center text-[14.5px] leading-[21px] text-[#9aa3b8]">
+          You’ll get a notification the moment Kiaan
           <br />
-          and earns their first{' '}
-          <span className="font-semibold text-ink">
-            <Dirham />50
-          </span>
-        </motion.p>
+          signs in and earns their first AED
+        </p>
       </div>
-
-      <div className="px-5 pb-9">
-        <PrimaryButton label="Done" onClick={onDone} />
-      </div>
-    </div>
+    </SetupShell>
   )
 }
