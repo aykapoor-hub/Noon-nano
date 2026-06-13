@@ -14,7 +14,8 @@ export type Child = {
   id: string
   name: string
   age: number
-  tone: string // avatar / accent colour
+  tone: string // accent dot colour
+  avatar?: string // photo asset name under /assets/family/
   balance: number
   tasks: Task[]
   since: string
@@ -53,6 +54,7 @@ const INITIAL_CHILDREN: Child[] = [
     name: 'Kiaan',
     age: 13,
     tone: '#2f9e63',
+    avatar: 'kiaan',
     balance: 5,
     since: 'Jun ’26',
     tasks: [
@@ -66,6 +68,7 @@ const INITIAL_CHILDREN: Child[] = [
     name: 'Sara',
     age: 11,
     tone: '#14532d',
+    avatar: 'sara',
     balance: 53,
     since: 'Mar ’26',
     tasks: [
