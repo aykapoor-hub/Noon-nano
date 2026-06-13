@@ -8,15 +8,24 @@ const PRESETS = ['Clean up room', 'Finish homework', 'Walk the dog', 'Help with 
 const REWARDS = [3, 5, 10]
 const CADENCES = ['Daily', 'Weekly', 'Once']
 
-export default function AssignTaskSheet({ open, onClose }: { open: boolean; onClose: () => void }) {
-  const { assignTask, childName } = useNano()
+export default function AssignTaskSheet({
+  open,
+  childId,
+  onClose,
+}: {
+  open: boolean
+  childId: string | null
+  onClose: () => void
+}) {
+  const { assignTaskToChild, childById } = useNano()
+  const child = childId ? childById(childId) : undefined
   const [label, setLabel] = useState('Clean up room')
   const [reward, setReward] = useState(5)
   const [cadence, setCadence] = useState('Daily')
 
   return (
     <Sheet open={open} onClose={onClose}>
-      <p className="text-[19px] font-bold text-ink">Assign a task to {childName}</p>
+      <p className="text-[19px] font-bold text-ink">Assign a task to {child?.name ?? 'your child'}</p>
       <p className="mt-1 text-[13.5px] text-[#7d8aa0]">They earn the reward when it’s done</p>
 
       <p className="mt-5 text-[13px] font-semibold text-[#6b7488]">Task</p>
@@ -69,7 +78,7 @@ export default function AssignTaskSheet({ open, onClose }: { open: boolean; onCl
         <PrimaryButton
           label="Assign task"
           onClick={() => {
-            assignTask(label, reward, cadence)
+            if (childId) assignTaskToChild(childId, label, reward, cadence)
             onClose()
           }}
         />

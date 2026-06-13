@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import SetupShell, { SetupFooter } from '../../components/SetupShell'
-import { asset } from '../../lib/asset'
+import GoldCheck from '../../components/GoldCheck'
 
 const Divider = () => (
   <div className="my-4 flex items-center gap-3">
@@ -20,14 +20,14 @@ export default function AllDone({ onBack, onDone }: { onBack: () => void; onDone
       footer={<SetupFooter label="Done" onClick={onDone} note="The invite link expires in 7 days. We’ll remind you." />}
     >
       <div className="rounded-[16px] bg-white px-6 py-7 shadow-[0_2px_10px_rgba(39,48,69,0.04)]">
-        <motion.img
-          src={asset('setup/gold_check.png')}
-          alt=""
+        <motion.div
           initial={{ scale: 0.6, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ type: 'spring', stiffness: 220, damping: 16 }}
-          className="mx-auto h-[104px] w-[104px]"
-        />
+          className="mx-auto w-[104px]"
+        >
+          <GoldCheck size={104} />
+        </motion.div>
         <h1 className="mt-6 text-center text-[28px] font-extrabold tracking-[-0.4px] text-[#1d2539]">
           Kiaan is all set!
         </h1>

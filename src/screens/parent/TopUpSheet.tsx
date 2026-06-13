@@ -6,13 +6,32 @@ import { useNano } from '../../state'
 
 const AMOUNTS = [10, 20, 50, 100]
 
-export default function TopUpSheet({ open, onClose }: { open: boolean; onClose: () => void }) {
-  const { addBalance, childName } = useNano()
+export default function TopUpSheet({
+  open,
+  childId,
+  onClose,
+}: {
+  open: boolean
+  childId: string | null
+  onClose: () => void
+}) {
+  const { topUpChild, childById } = useNano()
   const [amt, setAmt] = useState(20)
+  const child = childId ? childById(childId) : undefined
+
   return (
     <Sheet open={open} onClose={onClose}>
-      <p className="text-[19px] font-bold text-ink">Top up {childName}’s wallet</p>
-      <p className="mt-1 text-[13.5px] text-[#7d8aa0]">Money lands in their wallet instantly</p>
+      <p className="text-[19px] font-bold text-ink">Top up {child?.name ?? 'wallet'}’s wallet</p>
+      <p className="mt-1 text-[13.5px] text-[#7d8aa0]">
+        {child ? (
+          <>
+            Current balance <Dirham className="mx-px" />
+            {child.balance} · money lands instantly
+          </>
+        ) : (
+          'Money lands in their wallet instantly'
+        )}
+      </p>
 
       <div className="mt-5 flex items-center justify-center gap-1 py-2">
         <Dirham className="text-[#9aa3b8]" />
@@ -36,9 +55,9 @@ export default function TopUpSheet({ open, onClose }: { open: boolean; onClose: 
 
       <div className="mt-6">
         <PrimaryButton
-          label="Add money"
+          label={`Add ${amt} to ${child?.name ?? 'wallet'}`}
           onClick={() => {
-            addBalance(amt)
+            if (childId) topUpChild(childId, amt)
             onClose()
           }}
         />

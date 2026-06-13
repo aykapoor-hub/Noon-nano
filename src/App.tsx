@@ -26,6 +26,7 @@ import ApprovalRequired from './screens/parent/ApprovalRequired'
 import OrderApproved from './screens/parent/OrderApproved'
 import TopUpSheet from './screens/parent/TopUpSheet'
 import AssignTaskSheet from './screens/parent/AssignTaskSheet'
+import AddChildSheet from './screens/parent/AddChildSheet'
 
 const params = new URLSearchParams(window.location.search)
 if (params.has('nomotion')) MotionGlobalConfig.skipAnimations = true
@@ -68,7 +69,12 @@ export default function App() {
   const [mode, setMode] = useState<Mode>(qpMode ?? 'parent')
   const [parentStep, setParentStep] = useState<ParentStep>(qpParent ?? 'account')
   const [childStep, setChildStep] = useState<ChildStep>(qpChild ?? 'splash')
-  const [sheet, setSheet] = useState<'none' | 'topup' | 'assign'>('none')
+  const [sheet, setSheet] = useState<'none' | 'topup' | 'assign' | 'addchild'>('none')
+  const [sheetChild, setSheetChild] = useState<string | null>(null)
+  const openSheet = (s: 'topup' | 'assign', childId: string) => {
+    setSheetChild(childId)
+    setSheet(s)
+  }
 
   const goChild = (s: ChildStep) => {
     setMode('child')
@@ -105,9 +111,10 @@ export default function App() {
     family: (
       <FamilyDashboard
         onBack={() => setParentStep('account')}
-        onAssign={() => setSheet('assign')}
-        onTopUp={() => setSheet('topup')}
+        onAssign={(id) => openSheet('assign', id)}
+        onTopUp={(id) => openSheet('topup', id)}
         onApprovals={() => setParentStep('approval')}
+        onAddChild={() => setSheet('addchild')}
       />
     ),
     approval: (
@@ -173,8 +180,9 @@ export default function App() {
 
         {mode === 'parent' && (
           <>
-            <TopUpSheet open={sheet === 'topup'} onClose={() => setSheet('none')} />
-            <AssignTaskSheet open={sheet === 'assign'} onClose={() => setSheet('none')} />
+            <TopUpSheet open={sheet === 'topup'} childId={sheetChild} onClose={() => setSheet('none')} />
+            <AssignTaskSheet open={sheet === 'assign'} childId={sheetChild} onClose={() => setSheet('none')} />
+            <AddChildSheet open={sheet === 'addchild'} onClose={() => setSheet('none')} />
           </>
         )}
       </div>
