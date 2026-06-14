@@ -48,10 +48,11 @@ const Trash = () => (
 )
 
 function Donut() {
+  // outer Ø ~182px / stroke ~20px, measured 1:1 off the Figma frame
   const r = 54
   const c = 2 * Math.PI * r
   return (
-    <svg width="180" height="180" viewBox="0 0 140 140">
+    <svg width="206" height="206" viewBox="0 0 140 140">
       <circle cx="70" cy="70" r={r} fill="none" stroke="#14532d" strokeWidth="14" />
       <motion.circle cx="70" cy="70" r={r} fill="none" stroke="#2f9e63" strokeWidth="14" strokeLinecap="round" strokeDasharray={c} initial={{ strokeDashoffset: c }} animate={{ strokeDashoffset: c * 0.42 }} transition={{ duration: 0.9, ease: 'easeOut' }} transform="rotate(-90 70 70)" />
     </svg>
