@@ -190,7 +190,7 @@ export default function FamilyDashboard({ onBack, onAssign, onTopUp, onApprovals
         <div className="overflow-hidden rounded-[16px] bg-white">
           <div className="flex items-center justify-between border-b border-[#eaecf0] px-3 py-4">
             <div className="flex items-center gap-2.5">
-              <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[#eef1f5] text-[20px] font-extrabold text-[#5b6678]">A</span>
+              <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[#eef1f5] text-[24px] font-bold text-[#1d2539]">A</span>
               <div>
                 <p className="text-[18px] font-bold tracking-[-0.15px] text-[#1d2539]">Anmol’s Family</p>
                 <p className="text-[12px] text-[#475067]">{children.length} {children.length === 1 ? 'kid' : 'kids'}</p>
@@ -203,7 +203,7 @@ export default function FamilyDashboard({ onBack, onAssign, onTopUp, onApprovals
 
           <div className="flex flex-wrap justify-center gap-1.5 px-4 pt-3">
             {children.map((c) => (
-              <span key={c.id} className="flex h-9 items-center gap-1.5 rounded-full border border-[#f2f3f7] bg-[#fcfcfd] px-3 text-[12px] font-medium text-[#475067]">
+              <span key={c.id} className="flex h-9 items-center gap-1 rounded-full border border-[#f2f3f7] bg-[#fcfcfd] px-3 text-[12px] font-medium text-[#475067]">
                 <Avatar child={c} size={16} />
                 {c.name}
                 <span className="h-2 w-2 rounded-full" style={{ background: c.tone }} />
