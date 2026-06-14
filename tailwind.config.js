@@ -13,11 +13,11 @@ export default {
         'key-bg': '#e0e3e7',
       },
       fontFamily: {
-        display: ['Manrope', 'system-ui', 'sans-serif'],
-        body: ['Inter', 'system-ui', 'sans-serif'],
-        // noon's brand face is "Noontree" (proprietary); Figtree is the design's
-        // own fallback and the closest free stand-in — used on the Account page.
-        noon: ['Figtree', 'system-ui', 'sans-serif'],
+        // noon's brand face is "Noontree" (proprietary, loaded via src/loadFonts
+        // when files are present); Figtree is the closest free stand-in fallback.
+        noon: ['Noontree', 'Figtree', 'system-ui', 'sans-serif'],
+        display: ['Noontree', 'Manrope', 'system-ui', 'sans-serif'],
+        body: ['Noontree', 'Inter', 'system-ui', 'sans-serif'],
       },
       boxShadow: {
         key: '0 1px 0 rgba(0,0,0,0.30)',
