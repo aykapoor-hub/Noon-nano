@@ -27,6 +27,7 @@ import OrderApproved from './screens/parent/OrderApproved'
 import TopUpSheet from './screens/parent/TopUpSheet'
 import AssignTaskSheet from './screens/parent/AssignTaskSheet'
 import AddChildSheet from './screens/parent/AddChildSheet'
+import PhoneFrame from './components/PhoneFrame'
 
 const params = new URLSearchParams(window.location.search)
 if (params.has('nomotion')) MotionGlobalConfig.skipAnimations = true
@@ -162,7 +163,7 @@ export default function App() {
     <div className="flex h-full flex-col items-center justify-center gap-4 sm:p-6">
       <PersonaSwitch mode={mode} onChange={setMode} />
 
-      <div className="relative h-full w-full overflow-hidden bg-white sm:h-[812px] sm:w-[375px] sm:rounded-[44px] sm:shadow-[0_40px_90px_-20px_rgba(0,0,0,0.65)] sm:ring-[10px] sm:ring-[#0d111c]">
+      <PhoneFrame>
         <LayoutGroup>
           <AnimatePresence initial={false}>
             <motion.div
@@ -185,7 +186,7 @@ export default function App() {
             <AddChildSheet open={sheet === 'addchild'} onClose={() => setSheet('none')} />
           </>
         )}
-      </div>
+      </PhoneFrame>
     </div>
   )
 }
